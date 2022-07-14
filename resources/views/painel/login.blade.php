@@ -112,16 +112,21 @@
     </div>
 
     <div class="direita">
-        <h1>Faça Seu Login</h1>
-        <div>
-            <label for="ususrio">Usuário</label><br>
-            <input type="text" name="usuario">
-        </div>
-        <div>
-            <label for="senha">Senha</label><br>
-            <input type="password" name="senha">
-        </div>
-        <button><a href="home">Entrar</a></button>
+         <!-- Validation Errors -->
+         <x-auth-validation-errors class="mb-4" :errors="$errors" />
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
+            <h1>Faça Seu Login</h1>
+            <div>
+                <label for="ususrio">Email</label><br>
+                <input type="text" name="email">
+            </div>
+            <div>
+                <label for="senha">Senha</label><br>
+                <input type="password" name="password">
+            </div>
+            <button type="submit">Entrar</button>
+        </form>
     </div>
 </div>
 </body>

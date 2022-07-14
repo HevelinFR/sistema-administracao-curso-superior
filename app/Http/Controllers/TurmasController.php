@@ -8,18 +8,25 @@ use App\Models\Turmas;
 use App\Models\Professores;
 use App\Models\Disciplina;
 use App\Models\Alunos;
+use Illuminate\Support\Facades\Auth;
 
 class TurmasController extends Controller
 {
     public function index(){
         $turmas = Turmas::with('alunos', 'professores', 'disciplina')->get();
 
+        if(Auth::check() AND Auth::user()->permissao == 1){
+            $turmas = Turmas::with('alunos', 'professores', 'disciplina')->get()->where('professores_id', Auth::user()->id_usuario);
+        }
+
         return view('painel.turma', ['turmas' => $turmas]);
     }
 
+    public function list_alunos($id){
+        $turma = Turmas::with('alunos')->findOrFail($id);
 
-
-
+        return view('painel.turmaAlunos', ['turma' => $turma]);
+    }
 
     public function redir_registration(){
         $professores = Professores::all();

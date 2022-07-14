@@ -28,6 +28,13 @@ header {
     transition: all 0.3s ease;
 }
 
+.erro{
+    text-align: center;
+    background-color: #ed3535;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
 .header-container.flex-container {
     justify-content: space-between;
     align-items: center;

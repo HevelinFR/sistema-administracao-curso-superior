@@ -14,6 +14,7 @@
                 <th>Semestre</th>
                 <th>Disciplina</th>
                 <th>Professor</th>
+                <th>Alunos</th>
                 <th>Ações</th>
                 </tr>
             </thead>
@@ -24,6 +25,7 @@
                     <td data-column="semestre">{{$turma->semestre}}</td>
                     <td data-column="disciplina">{{$turma->disciplina->nome}}</td>
                     <td data-column="prof">{{$turma->professores->nome}}</td>
+                    <td><a href="/turma/alunos/{{$turma->id}}"><img src="{{url('painel/img/View.png')}}"></a></td>
                     <td class="flex-container"><a href="/turma/edit/{{$turma->id}}"><img src="{{url('painel/img/Edit.png')}}"></a>
 
                         <form action="turma/{{$turma->id}}" method="POST">

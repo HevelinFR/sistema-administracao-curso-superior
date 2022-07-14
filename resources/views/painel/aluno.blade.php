@@ -4,7 +4,9 @@
     <div class="wrapper-container">
         <div class="wrapper-header flex-container">
             <input type="search" name="" id="" placeholder="Pesquisar">
-            <a href="adicionar-aluno" class="btn"><img src="{{url('painel/img/add.png')}}" alt=""> Adicionar</a>
+            @if(Auth::user()->permissao == 0)
+                <a href="adicionar-aluno" class="btn"><img src="{{url('painel/img/add.png')}}" alt=""> Adicionar</a>
+            @endif
         </div>
         <table>
             <thead>

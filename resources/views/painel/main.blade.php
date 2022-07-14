@@ -18,12 +18,17 @@
         </div>
         <div class="iems-menu">
             <ul>
-                <li><a href="/alunos">Alunos</a></li>
-                <li><a href="/professor">Professor</a></li>
-                <li><a href="/turmas">Turma</a></li>
-                <li><a href="/disciplina">Disciplina</a></li>
-                <li><a href="/matricula">Matricula</a></li>
-                <li><a href="/matricula">Lançamento de notas</a></li>
+                @if(Auth::user()->permissao <=1)
+                    <li><a href="/alunos">Alunos</a></li>
+                    <li><a href="/professor">Professor</a></li>
+                    <li><a href="/turmas">Turma</a></li>
+                    <li><a href="/disciplina">Disciplina</a></li>
+                    <li><a href="/matricula">Matricula</a></li>
+                @endif
+                @if(Auth::user()->permissao ==2)
+                    <li><a href="/boletim">Boletim</a></li>
+                @endif
+
             </ul>
         </div>
     </div>
@@ -38,8 +43,11 @@
                     <div class="box-usuario flex-container">
 
                         <div class="nome-user">
-                            <p>Hevelin<br></p>
-                            <a href="/"><i class="fas fa-sign-out-alt"></i><span>Sair </span></a>
+                            <p>{{explode(' ',trim(Auth::user()->name))[0]}}<br></p>
+                            <form action="/logout" method="POST">
+                                @csrf
+                                <button type="submit"><i class="fas fa-sign-out-alt"></i><span>Sair</span></button>
+                            </form>
                         </div>
 
                         <div class="avatar-usuario">
@@ -55,13 +63,17 @@
         @if(session('msg'))
             <p class="msg" id="alert">{{session('msg')}}</p>
         @endif
+
+        @if(session('error'))
+            <p class="erro" id="alert">{{session('error')}}</p>
+        @endif
         @yield('content')
     </div>
 
 <script>
-    setTimeout(() => {
-        document.getElementById("alert").style.display = "none";
-    }, 2000); //depois de 3 segundos
+    // setTimeout(() => {
+    //     document.getElementById("alert").style.display = "none";
+    // }, 2000); //depois de 3 segundos
 </script>
 </body>
 
