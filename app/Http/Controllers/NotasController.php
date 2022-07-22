@@ -14,7 +14,7 @@ class NotasController extends Controller
     public function index(){
         $aluno = Alunos::where('id', Auth::user()->id_usuario)->first();
         $notas = Notas::where('id_aluno', Auth::user()->id_usuario)->get();
-        $turmas = Turmas::with('alunos', 'professores', 'disciplina')->get();
+
 
         return view('painel.boletim', ['alunos' => $aluno, 'notas'=> $notas]);
     }
